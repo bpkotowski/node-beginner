@@ -1,33 +1,33 @@
 const exec = require('child_process').exec;
 
 
-function start(response) {
+function start(response, postData) {
     console.log('rh start was called');
 
- const body =  `<html>`+
- 5 `<head>`+
- 6 `<meta http-equiv="Content-Type" content="text/html; `+
- 7 `charset=UTF-8" />`+
- 8 `</head>`+
- 9 `<body>`+
- 10 `<form action="/upload" method="post">`+
- 11 `<textarea name="text" rows="20" cols="60"></textarea>`+
- 12 `<input type="submit" value="Submit text" />`+
- 13 `</form>`+
- 14 `</body>`+
- 15 `</html>`; 
+    var body =  `<html>`+
+  `<head>`+
+  `<meta http-equiv="Content-Type" content="text/html; `+
+ `charset=UTF-8" />`+ `</head>`+
+ `<body>`+
+ `<form action="/upload" method="post">`+
+  `<textarea name="text" rows="20" cols="60"></textarea>`+
+  `<input type="submit" value="Submit text" />`+
+  `</form>`+
+  `</body>`+
+  `</html>`; 
     
- response.writeHead(200, (error, stdout, stderr));
- response.write(stdout);
+ response.writeHead(200, {'Content-Type' : 'text/html'});
+ response.write(body);
  response.end();
    
 }
 
 
 
-function upload() {
+function upload(response, postData) {
     console.log('rh upload was called');
-    response.writeHead('hey upload');
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.write('you sent' + postData);
     response.end();
 }
 
